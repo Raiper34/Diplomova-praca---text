@@ -35,7 +35,7 @@
 % Základní balíčky jsou dole v souboru šablony fitthesis.cls
 % Basic packages are at the bottom of template file fitthesis.cls
 %zde muzeme vlozit vlastni balicky / you can place own packages here
-
+\usepackage{listings}
 %---rm---------------
 \renewcommand{\rmdefault}{lmr}%zavede Latin Modern Roman jako rm / set Latin Modern Roman as rm
 %---sf---------------
@@ -198,6 +198,13 @@ Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}
   \iftwoside
     \cleardoublepage
   \fi
+  
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},morecomment=[l]{//},morecomment=[s]{/*}{*/},morestring=[b]',morestring=[b]",ndkeywords={class, export, boolean, throw, implements, import, this},keywordstyle=\color{blue}\bfseries,ndkeywordstyle=\color{darkgray}\bfseries,identifierstyle=\color{black},commentstyle=\color{purple}\ttfamily,stringstyle=\color{red}\ttfamily,sensitive=true}
+\lstset{language=JavaScript,xleftmargin=0.5cm, backgroundcolor=\color{lightgray},extendedchars=true,basicstyle=\footnotesize\ttfamily,showstringspaces=false,showspaces=false,numbers=left,numberstyle=\footnotesize,numbersep=9pt,tabsize=2,breaklines=true,showtabs=false,captionpos=b}
+\renewcommand{\lstlistingname}{Zdrojový kód}
 
   % Text prace / Thesis text
   % ----------------------------------------------
