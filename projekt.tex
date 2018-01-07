@@ -89,12 +89,12 @@
 %---------------------------------------------------------------------------
 \projectinfo{
   %Prace / Thesis
-  project=DP,            %typ prace BP/SP/DP/DR  / thesis type (SP = term project)
+  project=SP,            %typ prace BP/SP/DP/DR  / thesis type (SP = term project)
   year=2018,             %rok odevzdání / year of submission
   date=\today,           %datum odevzdani / submission date
   %Nazev prace / thesis title
-  title.cs={Detekce, lokalizace a určení plochy hematomů},  %nazev prace v cestine ci slovenstine (dle zadani) / thesis title in czech language (according to assignment)
-  title.en={Detection, Localization and Determination of Hematoma Area}, %nazev prace v anglictine / thesis title in english
+  title.cs={Detekce, lokalizace a určení plochy chronických ran},  %nazev prace v cestine ci slovenstine (dle zadani) / thesis title in czech language (according to assignment)
+  title.en={Detection, Localization and Determination of Chronic Wounds}, %nazev prace v anglictine / thesis title in english
   %Autor / Author
   author={Filip Gulán},   %cele jmeno a prijmeni autora / full name and surname of the author
   author.name={Filip},   %jmeno autora (pro citaci) / author name (for reference) 
@@ -131,26 +131,25 @@
 }
 
 %Abstrakt (cesky, slovensky ci anglicky) / Abstract (in czech, slovak or english)
-\abstract[cs]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v českém (slovenském) jazyce.}
-\abstract[en]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v anglickém jazyce.}
+\abstract[cs]{Cieľom tejto diplomovej práce je návrh a realizácia multiplatformnej aplikácie pre detekciu, lokalizáciu a určenie plochy chronických rán. Aplikácia má za úlohu pomáhať zdravotným sestrám, doktorom a ošetrovateľom sledovať a vyhodnocovať chronické rany v priebehu trvania liečby. Aplikácia je postavená na programovacom jazyku Typescript, hybridnom aplikačnom rámci Ionic a desktopovom aplikačnom rámci Electron. Vyhodnocovanie chronickej rany prebieha na strane servera, kde sa využíva programovací jazyk Python, pre RESTful aplikačné rozhranie aplikačný rámec Flask a pre spracovanie obrazu knižnica OpenCV.
+}
+\abstract[en]{The aim of this diploma thesis is to design and implement a multiplatform application for detection, localization and determination of the extent of chronic wounds. The application is intended to assist nurses, doctors and healthcare assistants to monitor and evaluate chronic wounds in the course of treatment. The application is based on the Typescript programming language, on the Ionic hybrid application framework and on the Electron desktop application framework. Chronic wound assessment runs on the server-side where the Python programming language is used. The Flask application framework is used for the RESTful application interface and the OpenCV library is used for image processing. 
+}
 
 %Klicova slova (cesky, slovensky ci anglicky) / Keywords (in czech, slovak or english)
-\keywords[cs]{Sem budou zapsána jednotlivá klíčová slova v českém (slovenském) jazyce, oddělená čárkami.}
-\keywords[en]{Sem budou zapsána jednotlivá klíčová slova v anglickém jazyce, oddělená čárkami.}
+\keywords[cs]{biomedicína, chronická rana, detekcia, lokalizácia, určenie plochy, Android aplikácia, Windows aplikácia, Ionic, OpenCV, Electron}
+\keywords[en]{biomedicine, chronic wound, detection, localization, determination, Android application, Windows application, Ionic, OpenCV, Electron}
 
 %Prohlaseni (u anglicky psane prace anglicky, u slovensky psane prace slovensky)
 %Declaration (for thesis in english should be in english)
-\declaration{Prohlašuji, že jsem tuto bakalářskou práci vypracoval samostatně pod vedením pana X...
-Další informace mi poskytli...
-Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}
+\declaration{Prehlasujem, že som túto bakalársku prácu vypracoval samostatne pod vedením pána Prof.Ing.,Dipl.-Ing. Martina Drahánskeho, Ph.D. Ďalšie informácie mi poskytol pán MUDr. Milan Sepši z FNsP Brno. Uviedol som všetky literárne pramene a publikácie, z ktorých som čerpal.}
 
 % \declaration{Hereby I declare that this bachelor's thesis was prepared as an original author’s work under the supervision of Mr. X
 % The supplementary information was provided by Mr. Y
 % All the relevant information sources, which were used during preparation of this thesis, are properly cited and included in the list of references.}
 
 %Podekovani (nepovinne, nejlepe v jazyce prace) / Acknowledgement (optional, ideally in the language of the thesis)
-\acknowledgment{V této sekci je možno uvést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc
-(externí zadavatel, konzultant, apod.).}
+\acknowledgment{Týmto by som sa chcel poďakovať vedúcemu práce pánovi Prof.Ing.,Dipl.-Ing. Martinovi Drahánskemu, Ph.D. a MUDr. Milanovi Sepšimu za odborné vedenie a cenné rady, ktoré mi pomohly pri tvorbe tejto práce. Zároveň ďakujem všetkým, ktorý ma podporovali behom štúdia.}
 %\acknowledgment{Here it is possible to express thanks to the supervisor and to the people which provided professional help
 %(external submitter, consultant, etc.).}
 
