@@ -1,4 +1,5 @@
 \chapter{Testovanie a vyhodnocovanie}
+\label{chap:testovanie-vyhodnocovanie}
 Po naimplementovaní navrhnutého riešenia, ktoré bolo popísané v kapitole \ref{chap:implementacia}, nasledovalo testovanie a vyhodnocovanie, ktorému sa venuje práve táto kapitola.  Kapitola začína popisom testovania serverového aplikačného riešenia pomocou testovacieho rámca Tavern, pokračuje testovaním užívateľského rozhrania aplikácie a vyhodnocovaním naimplementovanej detekcie chronických rán. Na záver kapitoly sú zhrnuté ďalšie možné vylepšenia práce a je načrtnuté budúce smerovanie projektu. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -28,13 +29,40 @@ Testy vytvorené pre Tavern sú teda definované v YAML súboroch, ktoré predst
 Testy sú spúšťané pomocou nástroju príkazového riadku Tavern-CI. Testy tejto práce boli rozdelené do 2 súborov, a to na prípady, ktoré môžu nastať pri každodennom používaní aplikácie (\textit{valid.tavern.yaml}) a na prípady, ktoré by mohli nastať iba v prípade nejakej neočakávanej chyby, alebo pri pokuse o hackovanie aplikácie (\textit{invalid.tavern.yaml}). Súbor \textit{enviroment.yaml} slúži na uchovávanie premenných, ktoré sa používajú a sú vkladané do obidvoch testov. Ide o premennú kľúča k Firebase Authentification, e-mailu a hesla k účtu testovacieho užívateľa a koreňovú adresu serveru aplikačného rozhrania. Kroky testu sa vyhodnocujú postupne a v prípade, že sa nevyhodnotí správne jeden krok, tak vyhodnocovanie ďalších krokov je zrušené a užívateľ je o tejto skutočnosti informovaný. Po otestovaní finálnej podoby aplikačného serverového rozhrania, kedy všetky testy dopadli úspešne, bolo toto rozhranie považované za stabilné a fungujúce správne. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Testovanie užívateľského rozhrania aplikácie}
-TODO
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Vyhodnocovanie detekcie chronickej rany}
-TODO
+\begin{table}[h]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Rana & Automatická detekcia (px) & Očakávaná hodnota (px) & Rozdiel (\%) \\ \hline
+1    & 6889                      & 14421                             & 47,77         \\ \hline
+2    & 331                       & 619                               & 53,47         \\ \hline
+3    & 1538                      & 10830                             & 14,20        \\ \hline
+4    & 11073                     & 2648                              & 418,16        \\ \hline
+5    & 8415                      & 9071                              & 92,76        \\ \hline
+6    & 3724                      & 3137                              & 118,71        \\ \hline
+7    & 47603                     & 34756                             & 136,96         \\ \hline
+8    & 6788                      & 7683                              & 88,35        \\ \hline
+9    & 24654                     & 2703                              & 912,09        \\ \hline
+10   & 5914                      & 6969                              & 84,86        \\ \hline
+\end{tabular}
+\caption{Výsledky}
+\label{tab:result}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ďalšie smerovanie projektu}
-TODO
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{fig/2o.jpeg}
+  \caption{Detekcia hematomu.}
+  \label{fig:2o}
+\end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{fig/3o.jpeg}
+  \caption{Detekcia znamienka.}
+  \label{fig:3o}
+\end{figure}
