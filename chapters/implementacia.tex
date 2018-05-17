@@ -195,15 +195,15 @@ Spracovanie snímkov je komplexnejší proces, ktorý prebieha z časti na serve
     \item \textbf{Modifikovanie HSV -} HSV\footnote{HSV je farebný model, ktorý pozostáva z 3 zložiek. Z farebného tónu, zo sýtosti farby a z hodnoty jasu. Model bol vytvorený v roku 1978 a autorom je Alvy Ray Smith.\cite{uF1voTq6ULHlwdRU}} model bol zvolený kvôli tomu, že môže byť modifikovaný do takej podoby, aby farby, ktoré sú pre ranu typické mali čo najväčšiu vzdialenosť. Pre zvýšenie presnosti pravdepodobnostnej mapy bol vytvorený modifikovaný HSV farebný model. Tento model napomáha reflektovať vzdialenosti medzi štyrmi farbami, ktoré sú v chronickej rane zahrnuté. Ide o červenú, žltú, čiernu a bielu farbu. V klasickom modeli je tmavo červená a tmavo žltá bližšie k čiernej a naopak bledo červená a bledo žltá bližšie k bielej, čo sa negatívne odzrkadľovalo na presnosti pravdepodobnostnej mapy. Jednotlivé kanále farebného modelu boli modifikované pomocou rovníc \ref{eq:hmod} až \ref{eq:vmod} \cite{AHMADFAUZI201574}. Ako $\alpha$ bola experimentálne zvolená hodnota 9 a ako $\beta$ zase -17, čo odpovedá 34 stupňovému uhlu. V kóde je tento prevod z originálneho HSV modelu na modifikovaný HSV model vykonaný pomocou funkcií \textit{getHMod()} \textit{getSVMod()}.
     \begin{equation}
     \label{eq:hmod}
-    H_{mod} = H + \beta
+    H_{m} = H + \beta
     \end{equation}
     \begin{equation}
     \label{eq:smod}
-    S_{mod} = \frac{log(\alpha * S + 1)}{log(\alpha + 1)}
+    S_{m} = \frac{log(\alpha * S + 1)}{log(\alpha + 1)}
     \end{equation}
     \begin{equation}
     \label{eq:vmod}
-    V_{mod} = \frac{log(\alpha * V + 1)}{log(\alpha + 1)}
+    V_{m} = \frac{log(\alpha * V + 1)}{log(\alpha + 1)}
     \end{equation}
     
     \item \textbf{Vytvorenie pravdepodobnostnej mapy RYKW -} Pravdepodobnostná mapa je v podstate matica slovníkov, ktoré obsahujú položky hodnôt pravdepodobnosti pre \textit{r} (červená), \textit{y} (žltá), \textit{k} (čierna) a \textit{w} (biela) a ďalšie položky pomocného charakteru. Položky \textit{r, y, k, w} v podstate predstavujú s akou pravdepodobnosťou daný pixel prichlúcha k danej farbe. Mapa bola vytvorená tak, že každý HSV pixel $x_{i,j}$ bol prevedený na pixel modifikovaného farebného modelu HSV, a ten následne na jednotlivé pravdepodobnosti \textit{RYKW} podľa rovníc \ref{eq:prob} kde $C_k = {R, Y, K, W}$ a $k = 1, 2, 3, 4$.
@@ -234,7 +234,7 @@ Spracovanie snímkov je komplexnejší proces, ktorý prebieha z časti na serve
     \label{eq:rykqdist}
     d(p, m) = \sqrt{{(R_{p} - R_{m})}^2 + {(Y_{p} - Y_{m})}^2 + {(K_{p} - K_{m})}^2 + {(W_{p} - W_{m})}^2}
     \end{equation}
-    V prípade, že zistená vzdialenosť je menšia ako daný prah (prah je experimentálne nastavený na hodnotu 0,035) tak je daný pixel zaradený medzi pixely segmentovanej rany a jeho susedstvo je pridané medzi body, ktoré sa budú znovu takto overovať. Týmto spôsobom sa získajú potenciálne všetky body, ktoré patria do okolia danej rany. Keďže algoritmus je pomerne časovo náročný, tak sa vykonáva na obrázku 5x zmenšenom oproti originálu. Takto sa dosiahlo toho, že vykonávanie algoritmu na testovacích snímkach trvalo od 5 sekúnd do 30 sekúnd. Tento čas bol priamo úmerný výslednej veľkosti segmentovanej rany, kedy sa na hranici 30 sekund segmentovala rana, ktorá zaberala odhadom tak 75 percent snímky. Vykonávanie tohoto algoritmu je v programe zaistené spustením funkcie \textit{regionGrowing()}, generovanie susedstva pomocou funkcie \textit{generatePoints()}, zistenie vzdialenosti bodu a priemeru pomocou funkcie \textit{countDistance()} a nakoniec zistenie nového priemeru danej oblasti pomocou funkcie \textit{setMeanProbability()}.
+    V prípade, že zistená vzdialenosť je menšia ako daný prah (prah je experimentálne nastavený na hodnotu 0,035) tak je daný pixel zaradený medzi pixely segmentovanej rany a jeho susedstvo je pridané medzi body, ktoré sa budú znovu takto overovať. Týmto spôsobom sa získajú potenciálne všetky body, ktoré patria do okolia danej rany. Keďže algoritmus je pomerne časovo náročný, tak sa vykonáva na obrázku 4x zmenšenom oproti originálu. Takto sa dosiahlo toho, že vykonávanie algoritmu na testovacích snímkach trvalo od 5 sekúnd do 30 sekúnd. Tento čas bol priamo úmerný výslednej veľkosti segmentovanej rany, kedy sa na hranici 30 sekund segmentovala rana, ktorá zaberala odhadom tak 75 percent snímky. Vykonávanie tohoto algoritmu je v programe zaistené spustením funkcie \textit{regionGrowing()}, generovanie susedstva pomocou funkcie \textit{generatePoints()}, zistenie vzdialenosti bodu a priemeru pomocou funkcie \textit{countDistance()} a nakoniec zistenie nového priemeru danej oblasti pomocou funkcie \textit{setMeanProbability()}.
     
     \item \textbf{Zistenie veľkosti rany -} Po tom, ako je rana segmentovaná pomocou algoritmu Region Growing a  je tento priestor ohraničený určitou farbou (typicky bielou, alebo čiernou), tak je možné pomocou kontúr vypočítať plochu tejto rany. Obrázok sa teda najprv prevedie do stupne šedi, následne sa prahuje a nakoniec sa použije funkcia knižnice OpenCV na hľadanie kontúr menom \textit{findContours()}. Výsledná plocha je potom získaná tak, že sa iteruje nad kontúrami a najväčšej kontúre je zistená jej plocha pomocou OpenCV funkcie \textit{contourArea()}. Takto sa teda získa plocha v pixeloch, ďalšie prepočty na veľkosť reálneho sveta sú vykonávané v klientskej aplikácií. 
 \end{enumerate}

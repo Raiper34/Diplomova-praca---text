@@ -30,13 +30,15 @@ Testy sú spúšťané pomocou nástroju príkazového riadku Tavern-CI. Testy t
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Vyhodnocovanie detekcie chronickej rany}
+Vyhodnocovanie a testovanie detekcie bolo vykonávané na snímkoch chronických rán, ktoré poskytla Fakultná nemocnica Brno. Ide o snímky vytvorené pomocu bežnej mobilnej kamery, ktorá nebola ničím špeciálna a nachádza sa takmer v každom modernom mobilnom zariadení. Snímky sú rôznej kvality a zachycujú rôzne chronické rany v rôznom štádií, od rán, ktoré sa skoro neprejavili, až po rany, ktoré už boli v pokročilom štádií a značne komplikované ako na liečbu, tak aj na samotnú detekciu. Snímky boli získavané nemocnicou približne od polovice januára 2018 do polovice mája 2018 a bolo takto možné získať 40 snímok 14 unikátnych defektov (v rovankom čase bol ten istý defekt zachytený niekoľkokrát). Z tých 14 defektov sa avšak nejednalo vždy o chornické rany, ale objavili sa aj starecké škvrny, alebo jendo 60 ročné znamienko. Unikátnych chronických rán bolo teda dokopy 12 a z toho 10 bolo použitých pre vyhodnocovanie. Všetky unikátne rany boli autorom práce anotované pomocou konzultácií s extenrým konzultantom tejto práce.
+
+Samotné vyhodnocovanie a testovanie bolo vykonávané tak, že testovacie snímky boli manuálne ohraničené externým konzultantom z nemocnice pomocou špeciálne vytvorenej webovej aplikácie pre tieto účely. Je nutné podotknúť, že chronické rany sú veľmi zložité a keď sa stretne viacero špecialistov, tak môžu mať rozdielny názor, čo ešte patrí do priestoru rany a čo už rana nieje. Je teda nutné pri detekcií a aj tvobre predlohy vždy rátať s určitou dávkou subjektivity. Rany na snímkach boli potom vždy detekované pomocou poloautomatickej metódy detekcie a manuálnej detekcie. Manuálna detekcia bola vykonaná podľa predlôh. Po detekcií, či už manuálnej alebo automatickej boli hodnoty vypočítaného obsahu rany v pixeloch navzájom porovnávané. Výsledky je možné vidieť v tabuľke \ref{tab:result}, kde je vždy číslo rany, ktoré dopovedá menu súboru z priečinku shots/eval nachádzajúceho sa na CD. Úspešnosť detekcie je vyjadrená číselne, kde hodnota 100\% odpovedá rane, ktorá ja zhodná s predlohou, hodnota pod 100\% znamená, že určité percento pixelov neoblo detekovaných a hodnota nad 100\% zase hovorí o tom, že určité percento pixelov bolo detekovaných nad rámec.
 \begin{table}[h]
 \centering
-\caption{My caption}
-\label{my-label}
+\label{tab:result}
 \begin{tabular}{|l|l|l|l|}
 \hline
-Rana & Automatická detekcia (px) & Očakávaná hodnota (px) & Rozdiel (\%) \\ \hline
+Rana & Automatická detekcia (px) & Očakávaná hodnota (px) & Miera zhody (\%) \\ \hline
 1    & 6889                      & 14421                             & 47,77         \\ \hline
 2    & 331                       & 619                               & 53,47         \\ \hline
 3    & 1538                      & 10830                             & 14,20        \\ \hline
@@ -48,21 +50,51 @@ Rana & Automatická detekcia (px) & Očakávaná hodnota (px) & Rozdiel (\%) \\ 
 9    & 24654                     & 2703                              & 912,09        \\ \hline
 10   & 5914                      & 6969                              & 84,86        \\ \hline
 \end{tabular}
-\caption{Výsledky}
-\label{tab:result}
+\caption{Výsledky vyhodnocovania}
 \end{table}
+V tabuľke výsledkov je možné si všimnúť, že hodnoty boli rôzne, tak ako jednotlivé rany. Behom práce bolo navrhnuté aby sa projekt zameral len na určitý druh rán v určitom štádií, vzhľadom na to, aké až príliš rozdielne boli jednotlivé rany. Bohužiaľ ale behom pol roka nebolo možné získať taký dostatočný počet snímkov, aby bolo možné sa užšie zamerať. Z obrázkov je jasné, že čo rana to v podstate iný druh v inom štádií, preto boli v rámci implementácie zvolené postupy také aké boli. Z tabuľky je možné si všimnúť hodnoty, ktoré sú až výrazne nad 100\%. Tieto rany boli síce detekované, avšak do okolia rany bol zahrnutý aj predstupeň pred defektom. Takúto ranu je možné vidieť na obrázkoch \ref{fig:w4} a \ref{fig:w4d}. Naopak veľmi dobre boli detekované rany, ktoré boli jasne iné ako okolitá pokožka a aj lajk by dokázal ranu ohraničiť, takým príklaodm môže byť rana na obrázkoch \ref{fig:w8} a \ref{fig:w8d}.
+\begin{figure}[h]
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/4m.jpeg}
+      \caption{Rana 4 - manuálna detekcia, očakávaná.}
+      \label{fig:w4}
+   \end{minipage}\hfill
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/4a.jpeg}
+      \caption{Rana 4 - automatická detekcia.}
+      \label{fig:w4d}
+   \end{minipage}
+   \break \break \break
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/8m.jpeg}
+      \caption{Rana 8 - manuálna detekcia, očakávaná.}
+      \label{fig:w8}
+   \end{minipage}\hfill
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/8a.jpeg}
+      \caption{Rana 8 - automatická detekcia.}
+      \label{fig:w8d}
+   \end{minipage}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ďalšie smerovanie projektu}
+Ako je možné vidieť, tak poloautomatická detekcia funguje rôzne na rôznych snímkach. Zatiaľ čo funguje na ranách, ktoré sú farebne dobre oddelené od okolitej kože, tak pomerne výraznejšie zlyháva na ranách, ktoré sú menej výrazné, alebo sú výrazne komplikované. Avšak aby boli tieto tvrdenia potvrdené, je nutné urobiť ďalšiu a oveľa väčšiu sadu snímkov, a keďže behom 5 mesačného obdobia bolo bolo zaznamenaných 12 unikátnych defektov, typu chronická rana, tak tento proces bude nezanedbateľne časovo trvať. Z toho dôvodu nie je úplne overená funkčnosť poloautomatickej detekcie. Aplikácia avšak môže byť využívaná, tak, že sa bude používať poloautomatická detekcia na jendoduchších a farebne výraznejších ranách, a na zložitejších ranách bude využívaná manuálna detekcia, pomocu ohraničenia rany prstom/myšou. Okrem toho, že poloautomatická detekcia bola testovaná na chronických ranách, tak bola testovaná aj na pár snímkach hematomov a jendom výraznom znamienku, ktoré nemocnica taktiež poskytla. Ako je vidieť na obrázkoch \label{fig:w2} a \label{fig:w3}, tak aplikácia môže byť použitá aj na takéto prípady, poprípade sa môže algoritmus ľahko upraviť, aby mohli byť detekované všetky tieto prípady, keďže hematómy sú v porovnaní s chronickými ranámi oveľa menej rozmanité.
 \begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.4]{fig/2o.jpeg}
-  \caption{Detekcia hematomu.}
-  \label{fig:2o}
-\end{figure}
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.4]{fig/3o.jpeg}
-  \caption{Detekcia znamienka.}
-  \label{fig:3o}
+   \begin{minipage}{0.4\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/2o.jpeg}
+      \caption{Detekcia hematómu.}
+      \label{fig:w2}
+   \end{minipage}\hfill
+   \begin{minipage}{0.4\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/3o.jpeg}
+      \caption{Detekcia znamienka.}
+      \label{fig:w3}
+   \end{minipage}
 \end{figure}
