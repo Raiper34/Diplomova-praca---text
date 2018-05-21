@@ -1,6 +1,6 @@
 \chapter{Testovanie a vyhodnocovanie}
 \label{chap:testovanie-vyhodnocovanie}
-Po naimplementovaní navrhnutého riešenia, ktoré bolo popísané v kapitole \ref{chap:implementacia}, nasledovalo testovanie a vyhodnocovanie, ktorému sa venuje práve táto kapitola.  Kapitola začína popisom testovania serverového aplikačného riešenia pomocou testovacieho rámca Tavern, pokračuje testovaním užívateľského rozhrania aplikácie a vyhodnocovaním naimplementovanej detekcie chronických rán. Na záver kapitoly sú zhrnuté ďalšie možné vylepšenia práce a je načrtnuté budúce smerovanie projektu. 
+Po naimplementovaní navrhnutého riešenia, ktoré bolo popísané v kapitole \ref{chap:implementacia}, nasledovalo testovanie a vyhodnocovanie, ktorému sa venuje práve táto kapitola.  Kapitola začína popisom testovania serverového aplikačného riešenia pomocou testovacieho rámca Tavern, pokračuje vyhodnocovaním naimplementovanej detekcie chronických rána a na záver kapitoly sú zhrnuté ďalšie možné vylepšenia práce a je načrtnuté budúce smerovanie projektu. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Testovanie serverového aplikačného rozhrania}
@@ -38,7 +38,7 @@ Samotné vyhodnocovanie a testovanie bolo vykonávané tak, že testovacie sním
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{fig/anotator.png}
-  \caption{Webová aplikácia na ohraničovanie snímok konzultantom.}
+  \caption{Webová aplikácia na ohraničovanie snímok konzultantom}
   \label{fig:anotator}
 \end{figure}
 Je nutné podotknúť, že chronické rany sú veľmi zložité a keď sa stretne viacero špecialistov, tak môžu mať rozdielny názor na to, čo ešte patrí do priestoru rany a čo už rana nieje. Je teda nutné pri detekcii a aj tvorbe predlohy a porovnávaní s ňou vždy rátať s určitou dávkou subjektivity. Rany na snímkach boli potom detekované pomocou poloautomatickej metódy detekcie. Po detekcii boli hodnoty vypočítaného obsahu rany a očakávaného obsahu v pixeloch navzájom porovnávané. Výsledky je možné vidieť v tabuľke \ref{tab:result}, kde je vždy uvedené číslo rany, ktoré odpovedá menu súboru z priečinku \textit{shots/eval} nachádzajúceho sa na priloženom nosiči. Úspešnosť detekcie je vždy vyjadrená číselne v pixeloch a v percentách. Okrem úspešnosti detekcie je prítomný aj stĺpec, ktorý hovorí, koľko pixelov na obrázku bolo klasifikovaných nesprávne ako pixel chronickej rany. 
@@ -65,27 +65,13 @@ V tabuľke výsledkov je možné si všimnúť, že výsledné hodnoty boli rôz
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ďalšie smerovanie projektu}
-Ako je možné zistiť podľa výsledkov, tak poloautomatická detekcia funguje rôzne na rôznych snímkach. Zatiaľ čo funguje na ranách, ktoré sú farebne dobre oddelené od okolitej kože, tak podstatne viac zlyháva na ranách, ktoré sú menej výrazné, alebo sú pomerne komplikované. Avšak, aby boli tieto tvrdenia potvrdené, je nutné urobiť ďalšiu a oveľa väčšiu sadu snímkov, a keďže behom 5 mesačného obdobia bolo bolo zaznamenaných 12 unikátnych defektov, typu chronická rana, tak tento proces bude nezanedbateľne časovo náročný. Z toho dôvodu nie je úplne overená funkčnosť poloautomatickej detekcie. Aplikácia však môže byť využívaná, tak, že sa bude používať poloautomatická detekcia na pomerne jednoduchších a farebne výraznejších ranách, a na zložitejších ranách bude využívaná manuálna detekcia pomocou ohraničenia rany prstom/myšou. Okrem toho, že poloautomatická detekcia bola testovaná na chronických ranách, tak bola testovaná aj na pár snímkach hematómov a jednom výraznom znamienku, ktoré nemocnica taktiež poskytla. Ako je vidieť na obrázkoch \label{fig:w2} a \label{fig:w3}, tak aplikácia môže byť použitá aj na takéto prípady. Poprípade sa môže algoritmus ľahko upraviť, aby mohli byť detekované všetky tieto prípady, keďže hematómy sú v porovnaní s chronickými ranami oveľa menej rozmanité a teda viac farebne navzájom podobné.
-\begin{figure}[h]
-   \begin{minipage}{0.4\textwidth}
-     \centering
-     \includegraphics[scale=0.35]{fig/2o.jpeg}
-      \caption{Detekcia hematómu.}
-      \label{fig:w2}
-   \end{minipage}\hfill
-   \begin{minipage}{0.4\textwidth}
-     \centering
-     \includegraphics[scale=0.35]{fig/3o.jpeg}
-      \caption{Detekcia znamienka.}
-      \label{fig:w3}
-   \end{minipage}
-\end{figure}
+Ako je možné zistiť podľa výsledkov, tak poloautomatická detekcia funguje rôzne na rôznych snímkach. Zatiaľ čo funguje na ranách, ktoré sú farebne dobre oddelené od okolitej kože, tak podstatne viac zlyháva na ranách, ktoré sú menej výrazné, alebo sú pomerne komplikované. Avšak, aby boli tieto tvrdenia potvrdené, je nutné urobiť ďalšiu a oveľa väčšiu sadu snímkov, a keďže behom 5 mesačného obdobia bolo bolo zaznamenaných 12 unikátnych defektov, typu chronická rana, tak tento proces bude nezanedbateľne časovo náročný. Z toho dôvodu nie je úplne overená funkčnosť poloautomatickej detekcie. Aplikácia však môže byť využívaná, tak, že sa bude používať poloautomatická detekcia na pomerne jednoduchších a farebne výraznejších ranách, a na zložitejších ranách bude využívaná manuálna detekcia pomocou ohraničenia rany prstom/myšou. Okrem toho, že poloautomatická detekcia bola testovaná na chronických ranách, tak bola testovaná aj na pár snímkach hematómov a jednom výraznom znamienku, ktoré nemocnica taktiež poskytla. Ako je vidieť na obrázkoch \ref{fig:w2} a \ref{fig:w3}, tak aplikácia môže byť použitá aj na takéto prípady. Poprípade sa môže algoritmus ľahko upraviť, aby mohli byť detekované všetky tieto prípady, keďže hematómy sú v porovnaní s chronickými ranami oveľa menej rozmanité a teda viac farebne navzájom podobné.
 
 \begin{figure}[h]
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.35]{fig/4m.jpeg}
-      \caption{Rana 4 - manuálna detekcia, očakávaná.}
+      \caption{Rana 4 - manuálna detekcia, očakávaná}
       \label{fig:w4}
    \end{minipage}\hfill
    \begin{minipage}{0.48\textwidth}
@@ -98,13 +84,28 @@ Ako je možné zistiť podľa výsledkov, tak poloautomatická detekcia funguje 
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.35]{fig/8m.jpeg}
-      \caption{Rana 8 - manuálna detekcia, očakávaná.}
+      \caption{Rana 8 - manuálna detekcia, očakávaná}
       \label{fig:w8}
    \end{minipage}\hfill
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.35]{fig/8a.jpeg}
-      \caption{Rana 8 - automatická detekcia.}
+      \caption{Rana 8 - automatická detekcia}
       \label{fig:w8d}
+   \end{minipage}
+\end{figure}
+
+\begin{figure}[h]
+   \begin{minipage}{0.4\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/2o.jpeg}
+      \caption{Detekcia hematómu}
+      \label{fig:w2}
+   \end{minipage}\hfill
+   \begin{minipage}{0.4\textwidth}
+     \centering
+     \includegraphics[scale=0.35]{fig/3o.jpeg}
+      \caption{Detekcia znamienka}
+      \label{fig:w3}
    \end{minipage}
 \end{figure}

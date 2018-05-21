@@ -4,7 +4,7 @@ V tejto kapitole je popísaný postup analýzy a návrhu riešenia tejto diplomo
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Analýza požiadaviek}
-Analýza požiadaviek čiastočne vychádza z kapitoly 1, v ktorej boli popísané dôležité teoretické znalosti a zároveň vychádza z informácií poskytnutých Fakultnou nemocnicou Brno a jej požiadavok. Podľa týchto informácií a požiadavok by malo ísť o aplikáciu určenú pre platformy Android, iOS a Windows Mobile, ktorá by mala umožňovať vyfotografovať chronickú ranu, primárne preležaninu, spolu s nejakou mierkou. Mierka by mala byť buď pero, alebo prst zdravotnej sestry, prípadne ošetrujúceho lekára a mal by byť nastaviteľný jeho rozmer. Aplikácia by mala byť schopná následne odfotografovanú ranu detekovať, lokalizovať a spočítať plošný rozmer cieľovej plochy, napríklad v milimetroch štvorcových alebo inej miere. V aplikácií by mala byť možnosť prihlásenia užívateľa pomocou sociálnych sietí, ako napríklad Facebook alebo Google+. Ďalej by mal mať užívateľ možnosť svoje snímky pomenovať, porovnať s minulými snímkami, mať možnosť tlače týchto snímok a prípadne ich ukladať na vzdialené úložisko, aby k nim mal prístup aj z iného zariadenia ako je aktuálne používané. Aplikácia by mala byť primárne cielená na zdravotné sestry, poprípade ošetrovateľov starajúcich sa o chronické rany a pomáhať im so sledovaním vývoja rán v čase. 
+Analýza požiadaviek čiastočne vychádza z kapitoly \ref{chap:teoreticky-rozbor}, v ktorej boli popísané dôležité teoretické znalosti a zároveň vychádza z informácií poskytnutých Fakultnou nemocnicou Brno a jej požiadavok. Podľa týchto informácií a požiadavok by malo ísť o aplikáciu určenú pre platformy Android, iOS a Windows Mobile, ktorá by mala umožňovať vyfotografovať chronickú ranu, primárne preležaninu, spolu s nejakou mierkou. Mierka by mala byť buď pero, alebo prst zdravotnej sestry, prípadne ošetrujúceho lekára a mal by byť nastaviteľný jeho rozmer. Aplikácia by mala byť schopná následne odfotografovanú ranu detekovať, lokalizovať a spočítať plošný rozmer cieľovej plochy, napríklad v milimetroch štvorcových alebo inej miere. V aplikácií by mala byť možnosť prihlásenia užívateľa pomocou sociálnych sietí, ako napríklad Facebook alebo Google+. Ďalej by mal mať užívateľ možnosť svoje snímky pomenovať, porovnať s minulými snímkami, mať možnosť tlače týchto snímok a prípadne ich ukladať na vzdialené úložisko, aby k nim mal prístup aj z iného zariadenia ako je aktuálne používané. Aplikácia by mala byť primárne cielená na zdravotné sestry, poprípade ošetrovateľov starajúcich sa o chronické rany a pomáhať im so sledovaním vývoja rán v čase. 
 
 Z vyššie uvedeného vyplýva, že aplikácia by mala byť dostupná na väčšinu platforiem, aj keď nie v rámci tejto diplomovej práce, ale predovšetkým v rámci dlhšieho časového horizontu vývoja. Z tohoto dôvody bolo usúdené, že by bolo dobré, ak by sa vytvorila hybridná aplikácia, ktorú stačí naprogramovať raz a už iba s drobnými úpravami je ju možné potom publikovať na väčšine dostupných platforiem. Keďže samotné spracovanie obrazu má v hybridných aplikáciách, webových aplikáciách a celkovo v Javasciptovom svete mizivú podporu, tak by spracovanie obrazu (konkrétne detekcia, lokalizácia a určenie plochy) nastávalo vzdialene na servery. Kvôli tomu bolo rozhodnuté, že programová realizácia by mala byť rozdelená na niekoľko logických celkov, ktorých existencia by bola navzájom od seba nezávislá. Mala by sa skladať zo samotnej mobilnej aplikácie, ktorá môže byť chápaná aj ako klientská časť realizácie, keďže ju bude vidieť každý používateľ aplikácie. Ďalej by išlo o databázovú časť, do ktorej by sa ukladali samotné dáta a potrebné informácie spojené s jednotlivými ranami, užívateľmi a snímkami. A nakoniec ako spojovník medzi týmito 2 časťami by figurovalo aplikačné rozhranie vzdialené na serverovej časti, ktoré by komunikovalo s klientskými aplikáciami, ukladalo a získavalo dáta z databáze, umožňovalo autorizáciu a autentifikáciu používateľov, a spracovávalo snímky rán.
 
@@ -19,7 +19,7 @@ Jedinou rolou v aplikácií, tvorenej v rámci tejto diplomovej práce, je rola 
 \begin{figure}[h]
       \centering
       \includegraphics[scale=0.420]{fig/use-case.eps}
-      \caption{Diagram prípadov užitia užívateľa aplikácie.}
+      \caption{Diagram prípadov užitia užívateľa aplikácie}
       \label{fig:usecase}
 \end{figure}
 
@@ -30,7 +30,7 @@ Prvá obrazovka, ktorá bola navrhnutá je obrazovka prihlásenia. Na túto obra
 \begin{figure}[h]
       \centering
       \includegraphics[scale=0.45]{fig/mockup1.png}
-      \caption{Obrazovka prihlásenia.}
+      \caption{Obrazovka prihlásenia}
       \label{fig:mockup1}
 \end{figure}
 
@@ -41,13 +41,13 @@ Po výbere konkrétnej položky by mal byť užívateľ prenesený na obrazovku 
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.45]{fig/mockup4.png}
-      \caption{Obrazovka zoznamu liečení.}
+      \caption{Obrazovka zoznamu liečení}
       \label{fig:mockup4}
    \end{minipage}\hfill
    \begin {minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.45]{fig/mockup5.png}
-      \caption{Obrazovka detailu liečenia.}
+      \caption{Obrazovka detailu liečenia}
       \label{fig:mockup5}
    \end{minipage}
 \end{figure}
@@ -59,13 +59,13 @@ V prípade, že sa užívateľ rozhodne, že mu odfotografovaný snímok vyhovuj
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.45]{fig/mockup6.png}
-      \caption{Obrazovka náhľadu práve získanej a detekovanej rany.}
+      \caption{Obrazovka náhľadu práve získanej a detekovanej rany}
       \label{fig:mockup6}
    \end{minipage}\hfill
    \begin {minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.45]{fig/mockup7.png}
-      \caption{Obrazovka detailu vyfotenej rany.}
+      \caption{Obrazovka detailu vyfotenej rany}
       \label{fig:mockup7}
    \end{minipage}
 \end{figure}
@@ -77,13 +77,13 @@ Na obrazovke nastavení zobrazenej na obrázku \ref{fig:mockup3} by sa mali dať
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.45]{fig/mockup2.png}
-      \caption{Globálne menu.}
+      \caption{Globálne menu}
       \label{fig:mockup2}
    \end{minipage}\hfill
    \begin {minipage}{0.48\textwidth}
      \centering
      \includegraphics[scale=0.45]{fig/mockup3.png}
-      \caption{Obrazovka nastavení a pridávanie mierky.}
+      \caption{Obrazovka nastavení a pridávanie mierky}
       \label{fig:mockup3}
    \end{minipage}
 \end{figure}
@@ -97,7 +97,7 @@ Návrh využíva informácie  z predchádzajúcej kapitoly o Návrhu aplikácie 
 \begin{figure}[h]
       \centering
       \includegraphics[scale=0.50]{fig/erd.eps}
-      \caption{ER diagram návrhu databáze.}
+      \caption{ER diagram návrhu databáze}
       \label{fig:erd}
 \end{figure}
 
@@ -115,7 +115,7 @@ Vytvoriť nové liečenie     & POST   & \{name: "Name", status: "Active"\} & /t
 Editovať liečenie s ID 34  & PUT    & \{name: ''New Name"\}              & /therapy/34  \\ \hline
 Odstrániť liečenie s ID 34 & DELETE & NULL                               & /therapy/34  \\ \hline
 \end{tabular}
-\caption{Príklady pre manipuláciu s liečením prostredníctvom aplikačného rozhrania}
+\caption{Príklady pre manipuláciu s liečením prostredníctvom aplikačného rozhrania.}
 \label{tab:rest-example}
 \end{table}
 
@@ -134,6 +134,6 @@ Kód                       & Význam                                            
 404 Not Found             & na servery sa nenašli požadované dáta                                  \\ \hline
 500 Internal Server Error & server zaznamenal neočakávanú udalosť                                  \\ \hline
 \end{tabular}
-\caption{Najbežnejšie používané status kódy HTTP v REST}
+\caption{Najbežnejšie používané status kódy HTTP v REST.}
 \label{tab:rest-codes}
 \end{table}
